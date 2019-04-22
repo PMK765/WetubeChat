@@ -1,0 +1,15 @@
+{
+  "name": "wetubechat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^2.2.33",
+    "socket.io": "^2.2.0"
+  }
+}
