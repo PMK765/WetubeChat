@@ -84,7 +84,8 @@
                             message.textContent = data[i].name+": "+data[i].message;
                             messages.appendChild(message);
                             //Switch this so chat builds downward instead
-                            messages.insertBefore(message, messages.firstChild);
+                            //messages.insertBefore(message, messages.firstChild);
+                            messages.insertBefore(message, messages.lastChild);
                         }
                     }
                 });
@@ -111,7 +112,6 @@
                         });
                         textarea.value = '';
                         
-                        //textarea.set
                         event.preventDefault();
                     }
                 });
