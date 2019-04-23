@@ -37,7 +37,7 @@
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js">
     </script>
     
     <script>
@@ -50,7 +50,7 @@
             var messages = element('messages');
             var textarea = element('textarea');
             var username = element('username');
-            var clear = element('clear');
+            var clearBtn = element('clear');
 
             //Set default status
             var statusDefault = status.textContent;
@@ -73,7 +73,9 @@
                 console.log("Connected to Socket...");
 
                 //Handle output
-                socket.on('output', function() {
+                socket.on('output', function(data) {
+                    //console.log('data');
+                    //console.log(data);
                     if(data.length) {
                         for(let i = 0 ; i < data.length; i++) {
                             //Build out the message div
@@ -88,7 +90,7 @@
                 });
 
                 //Get Status from Server
-                socket.on('status', function () {
+                socket.on('status', function (data) {
                     //Get message status
                     setStatus((typeof data === 'object') ? data.message : data);
 
@@ -101,12 +103,15 @@
                 //Handle Input
                 textarea.addEventListener('keydown', function (event) {
                     if(event.which === 13 && event.shiftKey == false) {
+                        console.log("Pressed Enter");
                         //emit to server input
                         socket.emit('input', {
                             name: username.value,
                             message: textarea.value
                         });
-
+                        textarea.value = '';
+                        
+                        //textarea.set
                         event.preventDefault();
                     }
                 });
